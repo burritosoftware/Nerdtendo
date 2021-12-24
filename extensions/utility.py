@@ -12,7 +12,7 @@ async def ping(ctx: lightbulb.Context) -> None:
 update_plugin = lightbulb.Plugin("Update")
 
 @update_plugin.command
-@lightbulb.command("update", description="Pulls the latest release from GitHub and updates the bot.")
+@lightbulb.command("update", description="Pulls the latest source from GitHub and updates the bot.")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def update(ctx: lightbulb.Context) -> None:
     if str(ctx.author.id) != "261236127581601793":
