@@ -12,11 +12,11 @@ async def ping(ctx: lightbulb.Context) -> None:
 update_plugin = lightbulb.Plugin("Update")
 
 @update_plugin.command
-@lightbulb.command("update", description="Pulls the latest release from GitHub and updates the bot.")
+@lightbulb.command("update", description="Pulls the latest source from GitHub and updates the bot.")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def update(ctx: lightbulb.Context) -> None:
     if str(ctx.author.id) != "261236127581601793":
-        await ctx.respond(f"You do not have permission to perform this command. ID: {ctx.author.id}")
+        await ctx.respond(f"You do not have permission to perform this command.")
     else:
         output = os.popen('git pull').read()
         if "Already up to date." in output:
