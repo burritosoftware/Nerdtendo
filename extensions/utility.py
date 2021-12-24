@@ -5,7 +5,7 @@ from subprocess import Popen
 ping_plugin = lightbulb.Plugin("Ping")
 
 @ping_plugin.command
-@lightbulb.command("ping", description="Get the bot's ping.", ephemeral=True)
+@lightbulb.command("ping", description="Get the bot's latency.", ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def ping(ctx: lightbulb.Context) -> None:
     await ctx.respond(f"Pong! Latency: {ctx.bot.heartbeat_latency*1000:.2f}ms")
