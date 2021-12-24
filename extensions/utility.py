@@ -1,5 +1,6 @@
 import lightbulb
 import os
+from subprocess import Popen
 
 ping_plugin = lightbulb.Plugin("Ping")
 
@@ -24,7 +25,8 @@ async def update(ctx: lightbulb.Context) -> None:
         else:
             await ctx.respond("Update complete! The bot will restart automatically...")
             if os.name != "nt":
-                os.system("pm2 restart bot")
+                p = Popen(['pm2 restart bot'])
+                p.poll()
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(ping_plugin)
