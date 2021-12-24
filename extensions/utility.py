@@ -19,7 +19,7 @@ async def update(ctx: lightbulb.Context) -> None:
         await ctx.respond(f"You do not have permission to perform this command. ID: {ctx.author.id}")
     else:
         output = os.popen('git pull').read()
-        if output == "Already up to date.":
+        if "Already up to date." in output:
             await ctx.respond("Bot already up to date.")
         else:
             await ctx.respond("Update complete, sending PM2 the restart signal on Linux, or restart manually now.")
