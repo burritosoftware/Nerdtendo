@@ -22,7 +22,7 @@ async def update(ctx: lightbulb.Context) -> None:
         if "Already up to date." in output:
             await ctx.respond("Bot already up to date.")
         else:
-            await ctx.respond("Update complete, sending PM2 the restart signal on Linux, or restart manually now.")
+            await ctx.respond("Update complete! The bot will restart automatically...")
             if os.name != "nt":
                 os.system("pm2 restart bot")
 
