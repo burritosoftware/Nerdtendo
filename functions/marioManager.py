@@ -6,7 +6,7 @@ async def getCourseInformation(bot, code):
     ) as response:
         res = await response.json()
 
-        if response.ok:
+        if response.ok and 'error' not in res:
             return(res)
         else:
             return(None)
