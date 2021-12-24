@@ -25,7 +25,7 @@ async def update(ctx: lightbulb.Context) -> None:
         else:
             await ctx.respond("Update complete! The bot will restart momentarily...")
             if os.name != "nt":
-                p = Popen(['pm2 restart bot'])
+                p = Popen(['pm2', 'restart', 'bot'])
                 p.poll()
 
 def load(bot: lightbulb.BotApp) -> None:
