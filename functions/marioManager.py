@@ -1,8 +1,8 @@
 import hikari
 
-async def getCourseInformation(bot, code):
+async def getCourseInformation(bot, id):
     async with bot.d.aio_session.get(
-        f"https://tgrcode.com/mm2/level_info/{code}"
+        f"https://tgrcode.com/mm2/level_info/{id}"
     ) as response:
         res = await response.json()
 
