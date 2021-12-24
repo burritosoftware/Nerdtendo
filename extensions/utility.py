@@ -1,15 +1,17 @@
 import lightbulb
 import os
 
-utility_plugin = lightbulb.Plugin("Utility")
+ping_plugin = lightbulb.Plugin("Ping")
 
-@utility_plugin.command
+@ping_plugin.command
 @lightbulb.command("ping", description="Get the bot's ping.")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def ping(ctx: lightbulb.Context) -> None:
     await ctx.respond(f"Pong! Latency: {ctx.bot.heartbeat_latency*1000:.2f}ms")
 
-@utility_plugin.command
+update_plugin = lightbulb.Plugin("Update")
+
+@update_plugin.command
 @lightbulb.command("update", description="Pulls the latest release from GitHub and updates the bot.")
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def update(ctx: lightbulb.Context) -> None:
@@ -26,4 +28,5 @@ async def update(ctx: lightbulb.Context) -> None:
                     os.system("pm2 restart bot")
 
 def load(bot: lightbulb.BotApp) -> None:
-    bot.add_plugin(utility_plugin)
+    bot.add_plugin(ping_plugin)
+    bot.add_plugin(update_plugin)
