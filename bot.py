@@ -51,10 +51,8 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
 bot.load_extensions_from("./extensions/", must_exist=True)
 
 # uvloop for performance on UNIX systems
-if __name__ == "__main__":
-    if os.name != "nt":
-        import uvloop
-
-        uvloop.install()
+if os.name != "nt":
+    import uvloop
+    uvloop.install()
 
 bot.run()
