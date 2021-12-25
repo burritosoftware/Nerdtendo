@@ -22,7 +22,7 @@ async def createCourseEmbed(res):
             colour=0x26AEA0
         )
         .set_thumbnail(f"https://tgrcode.com/mm2/level_thumbnail/{course_id}")
-        .set_thumbnail(f"https://tgrcode.com/mm2/level_entire_thumbnail/{course_id}")
+        .set_image(f"https://tgrcode.com/mm2/level_entire_thumbnail/{course_id}")
         .set_author(name=course_id, icon="https://static.wikia.nocookie.net/supermariomaker2/images/d/d4/Course_World-0.png/revision/latest?cb=20200426215204")
         .set_footer(
             text=f"Created by {res['uploader']['name']} | {uploader_code}",
