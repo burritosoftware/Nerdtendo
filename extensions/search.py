@@ -1,7 +1,14 @@
+import hikari
 import lightbulb
 import functions.marioManager as marioManager
+from lightbulb.ext import neon
 
 search_plugin = lightbulb.Plugin("Search")
+
+class fireMenu(neon.ComponentMenu):
+    @neon.button("fire", "fire_button", hikari.ButtonStyle.DANGER, emoji="\N{FIRE}")
+    async def fire(self) -> None:
+        await self.edit_msg("\N{FIRE}")
 
 @search_plugin.command
 @lightbulb.option(
@@ -16,8 +23,10 @@ async def search(ctx: lightbulb.Context) -> None:
     id = ctx.options.id
     response = await marioManager.getCourseInformation(ctx.bot, id)
     if response != None:
+        menu = fireMenu(ctx)
         embed = await marioManager.createCourseEmbed(response)
-        await ctx.respond(embed)
+        resp = await ctx.respond(embed, components=menu.build())
+        await menu.run(resp)
     else:
         await ctx.respond("Couldn't find a course by that ID!")
 
