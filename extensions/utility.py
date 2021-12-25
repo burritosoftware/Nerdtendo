@@ -23,7 +23,7 @@ async def update(ctx: lightbulb.Context) -> None:
         if "Already up to date." in output:
             await ctx.respond("Bot already up to date.")
         else:
-            await ctx.respond("Update complete! The bot will restart momentarily...")
+            await ctx.respond(f"Update complete! The bot will restart momentarily...\n\n```\n{output}\n```")
             if os.name != "nt":
                 p = Popen(['pm2', 'restart', 'bot'])
                 p.poll()
