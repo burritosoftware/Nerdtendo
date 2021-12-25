@@ -5,10 +5,14 @@ from lightbulb.ext import neon
 
 search_plugin = lightbulb.Plugin("Search")
 
-class fireMenu(neon.ComponentMenu):
+class levelMenu(neon.ComponentMenu):
     @neon.button("Open in course viewer", "viewer_button", hikari.ButtonStyle.PRIMARY, emoji="🔎")
-    async def fire(self) -> None:
-        await self.edit_msg("Course viewer coming soon!")
+    @neon.button("", "delete_button", hikari.ButtonStyle.PRIMARY, emoji="🔎")
+    async def buttonPanel(self, button: neon.Button) -> None:
+        if button.custom_id == "viewer_button":
+            await self.respond("Course viewer coming soon!", flags=hikari.MessageFlag.EPHEMERAL)
+        elif button.custom_id == "delete_button":
+            await self.delete()
 
 @search_plugin.command
 @lightbulb.option(
@@ -23,7 +27,7 @@ async def search(ctx: lightbulb.Context) -> None:
     id = ctx.options.id
     response = await marioManager.getCourseInformation(ctx.bot, id)
     if response != None:
-        menu = fireMenu(ctx)
+        menu = levelMenu(ctx)
         embed = await marioManager.createCourseEmbed(response)
         resp = await ctx.respond(embed, components=menu.build())
         await menu.run(resp)
