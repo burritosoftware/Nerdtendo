@@ -6,8 +6,8 @@ from lightbulb.ext import neon
 search_plugin = lightbulb.Plugin("Search")
 
 class levelMenu(neon.ComponentMenu):
-    @neon.button("Open in course viewer", "viewer_button", hikari.ButtonStyle.PRIMARY, emoji="🔎")
     @neon.button("", "delete_button", hikari.ButtonStyle.PRIMARY, emoji="🗑️")
+    @neon.button("Open in course viewer", "viewer_button", hikari.ButtonStyle.PRIMARY, emoji="🔎")
     @neon.button_group()
     async def buttonPanel(self, button: neon.Button) -> None:
         if button.custom_id == "viewer_button":
