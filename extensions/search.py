@@ -6,9 +6,9 @@ from lightbulb.ext import neon
 search_plugin = lightbulb.Plugin("Search")
 
 class fireMenu(neon.ComponentMenu):
-    @neon.button("fire", "fire_button", hikari.ButtonStyle.DANGER, emoji="\N{FIRE}")
+    @neon.button("Open in course viewer", "viewer_button", hikari.ButtonStyle.PRIMARY, emoji="\N{MAG_RIGHT}")
     async def fire(self) -> None:
-        await self.edit_msg("\N{FIRE}")
+        await self.edit_msg("Course viewer coming soon!")
 
 @search_plugin.command
 @lightbulb.option(
