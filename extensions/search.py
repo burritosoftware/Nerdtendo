@@ -11,9 +11,9 @@ class levelMenu(neon.ComponentMenu):
     @neon.button_group()
     async def buttonPanel(self, button: neon.Button) -> None:
         if button.custom_id == "viewer_button":
-            await self.respond("Course viewer coming soon!", flags=hikari.MessageFlag.EPHEMERAL)
+            await self.edit_msg("Course viewer coming soon!", flags=hikari.MessageFlag.EPHEMERAL)
         elif button.custom_id == "delete_button":
-            await self.delete()
+            await self.edit_msg("Self-deletion coming soon!")
 
 @search_plugin.command
 @lightbulb.option(
