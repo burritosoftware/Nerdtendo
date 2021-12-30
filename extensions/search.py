@@ -27,7 +27,7 @@ class levelMenu(neon.ComponentMenu):
 async def search(ctx: lightbulb.Context) -> None:
     id = ctx.options.id
     course = await marioManager.getCourseInformation(ctx.bot, id)
-    if course != None or course != 'Maker':
+    if course != None or 'Maker':
         menu = levelMenu(ctx)
         embed = await marioManager.createCourseEmbed(course)
         resp = await ctx.respond(embed, components=menu.build())
