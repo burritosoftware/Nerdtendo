@@ -5,6 +5,7 @@ import aiohttp
 import re
 import functions.marioManager as marioManager
 from dotenv import load_dotenv
+import dataset
 
 # Loading .env values
 load_dotenv()
@@ -16,6 +17,7 @@ bot = lightbulb.BotApp(token=os.getenv('TOKEN'), prefix='n!', banner=None, inten
 @bot.listen()
 async def on_starting(event: hikari.StartingEvent) -> None:
     bot.d.aio_session = aiohttp.ClientSession()
+    bot.d.db = dataset.connect('sqlite:///database.db')
 
 @bot.listen()
 async def on_stopping(event: hikari.StoppingEvent) -> None:
