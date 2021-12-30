@@ -17,10 +17,10 @@ class levelMenu(neon.ComponentMenu):
 
 @search_plugin.command
 @lightbulb.option(
-    "id", "The course's ID to search for", str, required=True
+    "id", "The course/maker's ID to search for", str, required=True
 )
 @lightbulb.command(
-    "search", "Search for a Super Mario Maker 2 course or maker.",
+    "search", "Search for a Super Mario Maker 2 course/maker.",
     auto_defer=True
 )
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
@@ -38,9 +38,9 @@ async def search(ctx: lightbulb.Context) -> None:
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
-            await ctx.respond("Couldn't find a course or maker by that ID!")
+            await ctx.respond("Couldn't find a course/maker by that ID!")
     else:
-        await ctx.respond("Couldn't find a course or maker by that ID!")
+        await ctx.respond("Couldn't find a course/maker by that ID!")
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(search_plugin)
