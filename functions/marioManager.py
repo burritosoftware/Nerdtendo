@@ -8,6 +8,19 @@ async def getCourseInformation(bot, id):
 
         if response.ok and 'error' not in res:
             return(res)
+        elif res['error'] == 'Code corresponds to a maker':
+            return('Maker')
+        else:
+            return(None)
+
+async def getMakerInformation(bot, id):
+    async with bot.d.aio_session.get(
+        f"https://tgrcode.com/mm2/user_info/{id}"
+    ) as response:
+        res = await response.json()
+
+        if response.ok and 'error' not in res:
+            return(res)
         else:
             return(None)
 
@@ -34,6 +47,26 @@ async def createCourseEmbed(res):
         .add_field("Difficulty", difficulty_name, inline=True)
         .add_field("Clears", str(res['clears']), inline=True)
         .add_field("Attempts", str(res['attempts']), inline=True)
+        
+        
+    )
+    return(embed)
+
+async def createMakerEmbed(res):
+    maker_id = '-'.join(res['course_id'][i:i+3] for i in range(0, len(res['code']), 3))
+    embed = (
+        hikari.Embed(
+            title=res['name'],
+            description=res['pose_name'],
+            colour=0x4151B1
+        )
+        .set_thumbnail(res['mii_image'])
+        .set_author(name=maker_id, icon="https://static.wikia.nocookie.net/supermariomaker2/images/d/d4/Course_World-0.png/revision/latest?cb=20200426215204")
+        .add_field("Likes", str(res['likes']), inline=True)
+        .add_field("Course Plays", str(res['courses_played']), inline=True)
+        .add_field("Course Clears", res['courses_cleared'], inline=True)
+        .add_field("Course Attempts", str(res['courses_attempted']), inline=True)
+        .add_field("Course Deaths", str(res['courses_deaths']), inline=True)
         
         
     )

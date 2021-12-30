@@ -20,20 +20,24 @@ class levelMenu(neon.ComponentMenu):
     "id", "The course's ID to search for", str, required=True
 )
 @lightbulb.command(
-    "search", "Search for a Super Mario Maker 2 course.",
+    "search", "Search for a Super Mario Maker 2 course or maker.",
     auto_defer=True
 )
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def search(ctx: lightbulb.Context) -> None:
     id = ctx.options.id
-    response = await marioManager.getCourseInformation(ctx.bot, id)
-    if response != None:
+    course = await marioManager.getCourseInformation(ctx.bot, id)
+    if course != None or course != 'Maker':
         menu = levelMenu(ctx)
-        embed = await marioManager.createCourseEmbed(response)
+        embed = await marioManager.createCourseEmbed(course)
         resp = await ctx.respond(embed, components=menu.build())
         await menu.run(resp)
+    elif course == 'Maker':
+        maker = await marioManager.getMakerInformation(ctx.bot, id)
+        embed = await marioManager.createMakerEmbed(maker)
+        await ctx.respond(embed)
     else:
-        await ctx.respond("Couldn't find a course by that ID!")
+        await ctx.respond("Couldn't find a course or maker by that ID!")
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(search_plugin)

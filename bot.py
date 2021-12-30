@@ -32,7 +32,6 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
     if event.is_bot or not event.content:
         return
 
-
     codes = re.findall(codeRegex, event.content, flags=re.I | re.M)
     embeds = []
     if codes != []:
@@ -42,9 +41,14 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
             for code in codes:
                 realcode = code[0]
                 res = await marioManager.getCourseInformation(bot, realcode)
-                if res != None:
+                if res != None or res != 'Maker':
                     await bot.rest.trigger_typing(event.get_channel())
                     embed = await marioManager.createCourseEmbed(res)
+                    embeds.append(embed)
+                elif res == 'Maker':
+                    await bot.rest.trigger_typing(event.get_channel())
+                    maker = await marioManager.getMakerInformation(bot, realcode)
+                    embed = await marioManager.createMakerEmbed(maker)
                     embeds.append(embed)
             if embeds != []:
                 await event.message.respond(embeds=embeds)
