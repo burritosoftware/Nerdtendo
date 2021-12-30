@@ -32,7 +32,7 @@ async def search(ctx: lightbulb.Context) -> None:
         embed = await marioManager.createCourseEmbed(course)
         resp = await ctx.respond(embed, components=menu.build())
         await menu.run(resp)
-    elif course == 'Maker':
+    elif course == 'Maker' and course != None:
         maker = await marioManager.getMakerInformation(ctx.bot, id)
         embed = await marioManager.createMakerEmbed(maker)
         await ctx.respond(embed)
