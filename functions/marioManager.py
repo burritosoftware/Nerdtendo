@@ -67,7 +67,9 @@ async def createMakerEmbed(res):
         .add_field("Course Clears", res['courses_cleared'], inline=True)
         .add_field("Course Attempts", str(res['courses_attempted']), inline=True)
         .add_field("Course Deaths", str(res['courses_deaths']), inline=True)
-        
+        .set_footer(
+            text=f"Last active on {res['last_active_pretty']}"
+        )
         
     )
     return(embed)
