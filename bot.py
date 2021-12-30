@@ -26,7 +26,7 @@ async def on_stopping(event: hikari.StoppingEvent) -> None:
 #############################################
 # SMM2 auto-code search                     #
 #############################################
-codeRegex = r"(([0-9]|[a-h]|[j-n]|[p-y]){3}(\-|\s)([0-9]|[a-h]|[j-n]|[p-y]){3}(\-|\s)([0-9]|[a-h]|[j-n]|[p-y]){3})"
+codeRegex = r"(([0-9]|[a-h]|[j-n]|[p-y]){3}(\-)([0-9]|[a-h]|[j-n]|[p-y]){3}(\-)([0-9]|[a-h]|[j-n]|[p-y]){3})"
 @bot.listen()
 async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
     if event.is_bot or not event.content:
