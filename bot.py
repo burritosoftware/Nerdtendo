@@ -39,6 +39,7 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
             await event.message.respond("Too many IDs in message, limit 5!")
         else:
             for code in codes:
+                print(code)
                 realcode = code[0]
                 res = await marioManager.getCourseInformation(bot, realcode)
                 if res != 'Maker':
