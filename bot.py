@@ -45,11 +45,12 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
                     await bot.rest.trigger_typing(event.get_channel())
                     embed = await marioManager.createCourseEmbed(res)
                     embeds.append(embed)
-                elif res == 'Maker' and res != None:
+                elif res == 'Maker':
                     await bot.rest.trigger_typing(event.get_channel())
                     maker = await marioManager.getMakerInformation(bot, realcode)
-                    embed = await marioManager.createMakerEmbed(maker)
-                    embeds.append(embed)
+                    if maker != None:
+                        embed = await marioManager.createMakerEmbed(maker)
+                        embeds.append(embed)
             if embeds != []:
                 await event.message.respond(embeds=embeds)
 
