@@ -53,7 +53,7 @@ async def createCourseEmbed(res):
     return(embed)
 
 async def createMakerEmbed(res):
-    maker_id = '-'.join(res['course_id'][i:i+3] for i in range(0, len(res['code']), 3))
+    maker_id = '-'.join(res['code'][i:i+3] for i in range(0, len(res['code']), 3))
     embed = (
         hikari.Embed(
             title=res['name'],
