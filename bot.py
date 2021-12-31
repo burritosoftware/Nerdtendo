@@ -53,7 +53,7 @@ async def on_message_create(event: hikari.GuildMessageCreateEvent) -> None:
     embeds = []
     if codes != []:
         if len(codes) > 5:
-            await event.message.respond("Too many IDs in message, limit 5!")
+            await event.message.respond("<:no:442206260151189518> Too many IDs in message, limit 5!")
         else:
             for code in codes:
                 realcode = code[0]

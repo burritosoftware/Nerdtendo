@@ -11,9 +11,9 @@ class levelMenu(neon.ComponentMenu):
     @neon.button_group()
     async def buttonPanel(self, button: neon.Button) -> None:
         if button.custom_id == "viewer_button":
-            await self.edit_msg("Course viewer coming soon!")
+            await self.edit_msg(":repeat: <:no:442206260151189518> Course viewer coming soon!")
         elif button.custom_id == "delete_button":
-            await self.edit_msg("Self-deletion coming soon!")
+            await self.edit_msg(":repeat: <:no:442206260151189518> Self-deletion coming soon!")
 
 @search_plugin.command
 @lightbulb.option(
@@ -40,9 +40,9 @@ async def search(ctx: lightbulb.Context) -> None:
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
-            await ctx.respond("Couldn't find a course/maker by that ID!", flags=hikari.MessageFlag.EPHEMERAL)
+            await ctx.respond("<:no:442206260151189518> Couldn't find a course/maker by that ID!", flags=hikari.MessageFlag.EPHEMERAL)
     else:
-        await ctx.respond("Couldn't find a course/maker by that ID!", flags=hikari.MessageFlag.EPHEMERAL)
+        await ctx.respond("<:no:442206260151189518> Couldn't find a course/maker by that ID!", flags=hikari.MessageFlag.EPHEMERAL)
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(search_plugin)

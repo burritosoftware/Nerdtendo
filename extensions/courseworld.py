@@ -23,9 +23,9 @@ cw_plugin = lightbulb.Plugin("Course World")
 async def setmakerid(ctx: lightbulb.Context) -> None:
     status = await addOrUpdateUser(bot=ctx.bot, id=ctx.author.id, makerid=ctx.options.makerid)
     if status:
-        await ctx.respond("Added your ID to the database!")
+        await ctx.respond("<:yes:459224261136220170> Added your ID to the database!")
     else:
-        await ctx.respond("Updated your ID in the database!")
+        await ctx.respond("<:yes:459224261136220170> Updated your ID in the database!")
 
 @cw_plugin.command
 @lightbulb.option(
@@ -43,9 +43,9 @@ async def getmakerid(ctx: lightbulb.Context) -> None:
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
-            await ctx.respond("Couldn't find a maker by that ID! This user has an invalid ID set.", flags=hikari.MessageFlag.EPHEMERAL)
+            await ctx.respond("<:no:442206260151189518> Couldn't find a maker by that ID! This user has an invalid ID set.", flags=hikari.MessageFlag.EPHEMERAL)
     else:
-        await ctx.respond("This user does not have their maker profile set.", flags=hikari.MessageFlag.EPHEMERAL)
+        await ctx.respond("<:no:442206260151189518> This user does not have their maker profile set.", flags=hikari.MessageFlag.EPHEMERAL)
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(cw_plugin)
