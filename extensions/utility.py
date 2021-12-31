@@ -22,7 +22,7 @@ async def update(ctx: lightbulb.Context) -> None:
     else:
         output = os.popen('git pull').read()
         if "Already up to date." in output:
-            await ctx.respond("Bot already up to date.")
+            await ctx.respond("<:yes:459224261136220170> Bot already up to date.")
         else:
             ctx.bot.d.logger.info(f"Bot updated!\n\n{output}")
             await ctx.respond(f"<:yes:459224261136220170> **Update complete!** The bot will restart momentarily...\n\n```\n{output}\n```")
