@@ -58,7 +58,7 @@ async def on_error(event: lightbulb.CommandErrorEvent) -> None:
         raise exception
 
 #############################################
-# SMM2 auto-code search                     #
+#          SMM2 auto-code search            #
 #############################################
 codeRegex = r"(([0-9]|[a-h]|[j-n]|[p-y]){3}(\-)([0-9]|[a-h]|[j-n]|[p-y]){3}(\-)([0-9]|[a-h]|[j-n]|[p-y]){3})"
 @bot.listen()
