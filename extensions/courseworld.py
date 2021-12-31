@@ -18,7 +18,7 @@ cw_plugin = lightbulb.Plugin("Course World")
 @lightbulb.option(
     "makerid", "The maker id to add to the database", str, required=True
 )
-@lightbulb.command("setmakerid", description="Set your maker ID to allow others to look up your profile.", auto_defer=True)
+@lightbulb.command("setmakerid", description="Set your maker ID to allow others to look up your profile.", auto_defer=True, ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def setmakerid(ctx: lightbulb.Context) -> None:
     status = await addOrUpdateUser(bot=ctx.bot, id=ctx.author.id, makerid=ctx.options.makerid)
@@ -39,6 +39,7 @@ async def getmakerid(ctx: lightbulb.Context) -> None:
     if user != None:
         maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
         if maker != None:
+            await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
