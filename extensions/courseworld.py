@@ -29,6 +29,7 @@ async def setmakerid(ctx: lightbulb.Context) -> None:
         await ctx.respond("<:yes:459224261136220170> Updated your ID in the database!")
 
 @cw_plugin.command
+@lightbulb.add_cooldown(length=2, uses=1, bucket=lightbulb.UserBucket)
 @lightbulb.option(
     "user", "The user to lookup their maker profile", hikari.User, required=True
 )

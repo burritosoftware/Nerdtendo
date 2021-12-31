@@ -16,6 +16,7 @@ class levelMenu(neon.ComponentMenu):
             await self.edit_msg(":repeat: <:no:442206260151189518> Self-deletion coming soon!")
 
 @search_plugin.command
+@lightbulb.add_cooldown(length=2, uses=1, bucket=lightbulb.UserBucket)
 @lightbulb.option(
     "id", "The course/maker's ID to search for", str, required=True
 )
