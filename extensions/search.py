@@ -21,13 +21,14 @@ class levelMenu(neon.ComponentMenu):
 )
 @lightbulb.command(
     "search", "Search for a Super Mario Maker 2 course/maker.",
-    auto_defer=True
+    auto_defer=False
 )
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def search(ctx: lightbulb.Context) -> None:
     id = ctx.options.id
     course = await marioManager.getCourseInformation(ctx.bot, id)
     if course != 'Maker' and course != None:
+        await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
         menu = levelMenu(ctx)
         embed = await marioManager.createCourseEmbed(course)
         resp = await ctx.respond(embed, components=menu.build())
@@ -35,6 +36,7 @@ async def search(ctx: lightbulb.Context) -> None:
     elif course == 'Maker':
         maker = await marioManager.getMakerInformation(ctx.bot, id)
         if maker != None:
+            await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
