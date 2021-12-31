@@ -45,7 +45,7 @@ async def getmakerid(ctx: lightbulb.Context) -> None:
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
-            await ctx.respond("<:no:442206260151189518> This user has an invalid ID set. Ask them to set their ID again.", flags=hikari.MessageFlag.EPHEMERAL)
+            await ctx.respond("<:no:442206260151189518> This user has an invalid ID set. Ask them to set their ID again.")
     else:
         await ctx.respond("<:no:442206260151189518> This user does not have their maker profile set.", flags=hikari.MessageFlag.EPHEMERAL)
 
