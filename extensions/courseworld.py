@@ -15,7 +15,7 @@ async def addOrUpdateUser(bot, id, makerid) -> None:
 
 cw_plugin = lightbulb.Plugin("Course World")
 @cw_plugin.command
-@lightbulb.add_cooldown(length=float(20))
+@lightbulb.add_cooldown(length=20, uses=1, bucket=lightbulb.UserBucket)
 @lightbulb.option(
     "makerid", "The maker ID to add to the database", str, required=True
 )
