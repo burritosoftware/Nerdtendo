@@ -40,6 +40,23 @@ async def on_started(event: hikari.StartedEvent) -> None:
     await bot.update_presence(activity=hikari.Activity(name="/help | Let's make! ⚒️"))
     logger.info("Updated presence")
 
+# Error Handler
+@bot.listen(lightbulb.CommandErrorEvent)
+async def on_error(event: lightbulb.CommandErrorEvent) -> None:
+    if isinstance(event.exception, lightbulb.CommandInvocationError):
+        await event.context.respond(f"<:no:442206260151189518> An error while running `{event.context.command.name}`. If this persists, please contact Burrito.", flags=hikari.MessageFlag.EPHEMERAL)
+        raise event.exception
+
+    # Unwrap the exception to get the original cause
+    exception = event.exception.__cause__ or event.exception
+
+    if isinstance(exception, lightbulb.NotOwner):
+        await event.context.respond("<:no:442206260151189518> You are not the owner of this bot.", flags=hikari.MessageFlag.EPHEMERAL)
+    elif isinstance(exception, lightbulb.CommandIsOnCooldown):
+        await event.context.respond(f":hourglass: This command is on cooldown. Retry in `{exception.retry_after:.2f}` seconds.", flags=hikari.MessageFlag.EPHEMERAL)
+    else:
+        raise exception
+
 #############################################
 # SMM2 auto-code search                     #
 #############################################
