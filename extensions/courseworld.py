@@ -36,12 +36,15 @@ async def setmakerid(ctx: lightbulb.Context) -> None:
 async def getmakerid(ctx: lightbulb.Context) -> None:
     table = await dataManager.tableLookup(ctx.bot, 'user')
     user = await dataManager.findUser(table, ctx.options.user.id)
-    maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
-    if maker != None:
-        embed = await marioManager.createMakerEmbed(maker)
-        await ctx.respond(embed)
+    if user != None:
+        maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
+        if maker != None:
+            embed = await marioManager.createMakerEmbed(maker)
+            await ctx.respond(embed)
+        else:
+            await ctx.respond("Couldn't find a maker by that ID! This user has an invalid ID set.", flags=hikari.MessageFlag.EPHEMERAL)
     else:
-        await ctx.respond("Couldn't find a maker by that ID! This user has an invalid ID set.", flags=hikari.MessageFlag.EPHEMERAL)
+        await ctx.respond("This user does not have their maker profile set.", flags=hikari.MessageFlag.EPHEMERAL)
 
 def load(bot: lightbulb.BotApp) -> None:
     bot.add_plugin(cw_plugin)
