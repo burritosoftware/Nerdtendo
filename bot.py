@@ -37,7 +37,7 @@ async def on_stopping(event: hikari.StoppingEvent) -> None:
 # Update presence on started
 @bot.listen()
 async def on_started(event: hikari.StartedEvent) -> None:
-    await bot.update_presence(activity=hikari.Activity(name=f"{os.getenv('PREFIX')}help | Let's make!"))
+    await bot.update_presence(activity=hikari.Activity(name="/help | Let's make! ⚒️"))
     logger.info("Updated presence")
 
 #############################################
