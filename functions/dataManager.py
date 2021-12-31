@@ -19,6 +19,11 @@ def blockingTableInsert(table, dict):
     record = table.insert(dict)
     return record
 
+# Provide a table, and a dictionary entry to update, and a filter, and this will return the updated table
+def blockingTableUpdate(table, dict, filter):
+    record = table.update(dict, filter)
+    return record
+
 # Provide a table and a userid, and this will return their object from the db
 def blockingFindUser(table, id):
     record = table.find_one(id=id)
@@ -32,6 +37,11 @@ def tableLookup(bot, tablename):
 @run_in_executor
 def tableInsert(table, dict):
     resp = blockingTableInsert(table, dict)
+    return resp
+
+@run_in_executor
+def tableUpdate(table, dict, filter):
+    resp = blockingTableUpdate(table, dict, filter)
     return resp
 
 @run_in_executor

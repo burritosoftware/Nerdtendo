@@ -26,7 +26,7 @@ async def on_starting(event: hikari.StartingEvent) -> None:
     logger.info("Created aiohttp.ClientSession")
     bot.d.logger = logger
     logger.info("Added logger to datastore")
-    bot.d.db = dataset.connect(os.getenv('DATABASE'))
+    bot.d.db = dataset.connect(os.getenv('DATABASE'), engine_kwargs=dict(connect_args={'check_same_thread': False}))
     logger.info(f"Connected to database {os.getenv('DATABASE')}")
 
 @bot.listen()
