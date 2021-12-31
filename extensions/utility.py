@@ -1,3 +1,4 @@
+from hikari.presences import Status
 import lightbulb
 import os
 from subprocess import Popen
@@ -25,7 +26,9 @@ async def update(ctx: lightbulb.Context) -> None:
         if "Already up to date." in output:
             await ctx.respond("Bot already up to date.")
         else:
+            ctx.bot.d.logger.info(f"Bot updated!\n\n{output}")
             await ctx.respond(f"Update complete! The bot will restart momentarily...\n\n```\n{output}\n```")
+            await ctx.bot.update_presence(status=hikari.Status.IDLE, activity=hikari.Activity(name="Updating, please wait..."))
             if os.name != "nt":
                 p = Popen(['pm2', 'restart', 'bot'])
                 p.poll()
