@@ -19,7 +19,7 @@ cw_plugin = lightbulb.Plugin("Course World")
 @lightbulb.option(
     "makerid", "The maker ID to add to the database", str, required=True
 )
-@lightbulb.command("setmakerid", description="Sets your maker ID to allow others to look up your profile.", auto_defer=False, ephemeral=True)
+@lightbulb.command("setmakerid", description="Sets your maker ID to allow others to look up your profile.", auto_defer=True, ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def setmakerid(ctx: lightbulb.Context) -> None:
     status = await addOrUpdateUser(bot=ctx.bot, id=ctx.author.id, makerid=ctx.options.makerid)
@@ -40,12 +40,12 @@ async def getmakerid(ctx: lightbulb.Context) -> None:
     user = await dataManager.findUser(table, ctx.options.user.id)
     if user != None:
         maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
+        await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
         if maker != None:
-            await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
         else:
-            await ctx.respond("<:no:442206260151189518> Couldn't find a maker by that ID! This user has an invalid ID set.", flags=hikari.MessageFlag.EPHEMERAL)
+            await ctx.respond("<:no:442206260151189518> This user has an invalid ID set. Ask them to set their ID again.", flags=hikari.MessageFlag.EPHEMERAL)
     else:
         await ctx.respond("<:no:442206260151189518> This user does not have their maker profile set.", flags=hikari.MessageFlag.EPHEMERAL)
 
