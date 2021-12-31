@@ -16,9 +16,9 @@ async def addOrUpdateUser(bot, id, makerid) -> None:
 cw_plugin = lightbulb.Plugin("Course World")
 @cw_plugin.command
 @lightbulb.option(
-    "makerid", "The maker id to add to the database", str, required=True
+    "makerid", "The maker ID to add to the database", str, required=True
 )
-@lightbulb.command("setmakerid", description="Set your maker ID to allow others to look up your profile.", auto_defer=False, ephemeral=True)
+@lightbulb.command("setmakerid", description="Sets your maker ID to allow others to look up your profile.", auto_defer=False, ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def setmakerid(ctx: lightbulb.Context) -> None:
     status = await addOrUpdateUser(bot=ctx.bot, id=ctx.author.id, makerid=ctx.options.makerid)
@@ -29,9 +29,9 @@ async def setmakerid(ctx: lightbulb.Context) -> None:
 
 @cw_plugin.command
 @lightbulb.option(
-    "user", "The user to lookup their maker ID", hikari.User, required=True
+    "user", "The user to lookup their maker profile", hikari.User, required=True
 )
-@lightbulb.command("lookup", description="Lookup a user's maker profile.", auto_defer=False)
+@lightbulb.command("lookup", description="Looks up a user's maker profile.", auto_defer=False)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def getmakerid(ctx: lightbulb.Context) -> None:
     table = await dataManager.tableLookup(ctx.bot, 'user')

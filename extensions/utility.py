@@ -8,7 +8,7 @@ import functions.dataManager as dataManager
 bot_plugin = lightbulb.Plugin("Bot")
 
 @bot_plugin.command
-@lightbulb.command("ping", description="Get the bot's latency.", ephemeral=True)
+@lightbulb.command("ping", description="Gets the bot's latency.", ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
 async def ping(ctx: lightbulb.Context) -> None:
     await ctx.respond(f":ping_pong: **Pong!** Latency: {ctx.bot.heartbeat_latency*1000:.2f}ms")

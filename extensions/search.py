@@ -20,7 +20,7 @@ class levelMenu(neon.ComponentMenu):
     "id", "The course/maker's ID to search for", str, required=True
 )
 @lightbulb.command(
-    "search", "Search for a Super Mario Maker 2 course/maker.",
+    "search", "Searches for a Super Mario Maker 2 course/maker.",
     auto_defer=False
 )
 @lightbulb.implements(lightbulb.PrefixCommand, lightbulb.SlashCommand)
