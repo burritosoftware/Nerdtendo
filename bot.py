@@ -44,7 +44,7 @@ async def on_started(event: hikari.StartedEvent) -> None:
 @bot.listen(lightbulb.CommandErrorEvent)
 async def on_error(event: lightbulb.CommandErrorEvent) -> None:
     if isinstance(event.exception, lightbulb.CommandInvocationError):
-        await event.context.respond(f"<:no:442206260151189518> An error occured while running `{event.context.command.name}`. If this persists, please contact Burrito at <https://website.burrito.software/discord>.", flags=hikari.MessageFlag.EPHEMERAL)
+        await event.context.respond(f"<:no:442206260151189518> An error occurred while running `{event.context.command.name}`. If this persists, please contact Burrito at <https://website.burrito.software/discord>.", flags=hikari.MessageFlag.EPHEMERAL)
         raise event.exception
 
     # Unwrap the exception to get the original cause
