@@ -15,7 +15,7 @@ load_dotenv()
 logger = logging.getLogger('nerdtendo.bot')
 
 # Ininitializing bot instance
-bot = lightbulb.BotApp(token=os.getenv('TOKEN'), prefix=os.getenv('PREFIX'), banner=None, intents=hikari.Intents.ALL_UNPRIVILEGED, default_enabled_guilds=(173146091640848384,419367512262705152,755956418619637820,439591923070533652,))
+bot = lightbulb.BotApp(token=os.getenv('TOKEN'), prefix=os.getenv('PREFIX'), banner=None, intents=hikari.Intents.ALL_UNPRIVILEGED, default_enabled_guilds=(173146091640848384,419367512262705152,755956418619637820,439591923070533652,750581992223146074,))
 
 # Create and close an aiohttp.ClientSession on start and stop of bot, add it to DataStore
 # Initialize database and add it to DataStore
