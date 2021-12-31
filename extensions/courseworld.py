@@ -39,8 +39,8 @@ async def getmakerid(ctx: lightbulb.Context) -> None:
     table = await dataManager.tableLookup(ctx.bot, 'user')
     user = await dataManager.findUser(table, ctx.options.user.id)
     if user != None:
-        maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
         await ctx.respond(hikari.ResponseType.DEFERRED_MESSAGE_CREATE)
+        maker = await marioManager.getMakerInformation(ctx.bot, user['makerid'])
         if maker != None:
             embed = await marioManager.createMakerEmbed(maker)
             await ctx.respond(embed)
