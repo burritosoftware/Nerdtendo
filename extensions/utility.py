@@ -66,7 +66,7 @@ async def servers(ctx: lightbulb.Context) -> None:
 @lightbulb.command("createinvite", description="Creates an invite to a server for support purposes.", auto_defer=True, ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand)
 async def servers(ctx: lightbulb.Context) -> None:
-    invite = await ctx.bot.rest.create_invite(ctx.options.id, max_uses=1, max_age=10)
+    invite = await ctx.bot.rest.create_invite(ctx.options.id, max_uses=1, max_age=10, reason="Invite created for support/bot troubleshooting")
     await ctx.respond(f"<:yes:459224261136220170> **Valid for 10 seconds...** https://discord.gg/{invite.code}")
 
 def load(bot: lightbulb.BotApp) -> None:
