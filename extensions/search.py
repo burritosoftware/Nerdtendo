@@ -11,9 +11,9 @@ class levelMenu(neon.ComponentMenu):
     @neon.button_group()
     async def buttonPanel(self, button: neon.Button) -> None:
         if button.custom_id == "viewer_button":
-            await self.edit_msg(":repeat: <:no:442206260151189518> Course viewer coming soon!")
+            await self.edit_msg(":repeat: Course viewer coming soon!")
         elif button.custom_id == "delete_button":
-            await self.edit_msg(":repeat: <:no:442206260151189518> Self-deletion coming soon!")
+            await self.edit_msg(":repeat: Self-deletion coming soon!")
 
 @search_plugin.command
 @lightbulb.add_cooldown(length=2, uses=1, bucket=lightbulb.UserBucket)

@@ -2,6 +2,10 @@ import lightbulb
 import os
 from subprocess import Popen
 import hikari
+import re
+import textwrap
+from io import StringIO
+from contextlib import redirect_stdout
 
 bot_plugin = lightbulb.Plugin("Bot")
 
@@ -26,6 +30,38 @@ async def update(ctx: lightbulb.Context) -> None:
         if os.name != "nt":
             p = Popen(['pm2', 'restart', 'bot'])
             p.poll()
+
+@bot_plugin.command
+@lightbulb.add_checks(lightbulb.owner_only)
+@lightbulb.command("eval", description="Evaluates Python code.", auto_defer=True, ephemeral=True)
+@lightbulb.implements(lightbulb.PrefixCommand)
+async def eval(ctx: lightbulb.Context) -> None:
+    code = re.findall(r"```(?:[\w]*\n?)([\s\S(^\\`{3})]*?)\n*```", ctx.event.message.content)
+    if not code:
+        await ctx.respond("<:no:442206260151189518> Expected a Python codeblock.")
+        return
+    if "import os" in code or "import sys" in code or "token" in code:
+        await ctx.respond("<:no:442206260151189518> This code has been blocked from running for security.")
+        return
+        
+    else:
+        code = ' '.join(code).strip('` ') 
+        env = {'bot': ctx.bot, 'ctx': ctx, 'message': ctx.event.message}
+        env.update(globals()) 
+        new_forced_async_code = f"async def code():\n{textwrap.indent(code, ' ')}"
+        exec(new_forced_async_code, env) 
+        code = env['code'] 
+        f = StringIO()
+        with redirect_stdout(f):
+            try: 
+                await code()
+            except Exception as e:
+                await ctx.respond(f"<:no:442206260151189518> **error:**\n```py\n{e}\n```")
+                return
+        if f.getvalue() != "":
+            await ctx.respond(f"<:yes:459224261136220170> **stdout:**\n```py\n{f.getvalue()}\n```")
+        else:
+            await ctx.event.message.add_reaction(emoji="yes",emoji_id=459224261136220170)
 
 # @bot_plugin.command
 # @lightbulb.add_checks(lightbulb.owner_only)
