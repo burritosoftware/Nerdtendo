@@ -33,7 +33,7 @@ async def update(ctx: lightbulb.Context) -> None:
 
 @bot_plugin.command
 @lightbulb.add_checks(lightbulb.owner_only)
-@lightbulb.command("eval", description="Evaluates Python code.", auto_defer=True, ephemeral=True)
+@lightbulb.command("eval", description="Evaluates Python code.", ephemeral=True)
 @lightbulb.implements(lightbulb.PrefixCommand)
 async def eval(ctx: lightbulb.Context) -> None:
     code = re.findall(r"```(?:[\w]*\n?)([\s\S(^\\`{3})]*?)\n*```", ctx.event.message.content)
