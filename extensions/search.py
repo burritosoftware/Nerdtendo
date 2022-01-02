@@ -13,7 +13,7 @@ class levelMenu(neon.ComponentMenu):
         if button.custom_id == "viewer_button":
             await self.edit_msg(":repeat: Course viewer coming soon!")
         elif button.custom_id == "delete_button":
-            await self.inter.delete_message()
+            await self.inter.delete_initial_response()
 
 @search_plugin.command
 @lightbulb.add_cooldown(length=2, uses=1, bucket=lightbulb.UserBucket)
