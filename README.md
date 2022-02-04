@@ -7,6 +7,7 @@ The original Super Mario Maker Discord bot, now supporting SMM2!
 
 ### Requirements
 - Python 3.8+
+- A copy of [Toost](https://github.com/TheGreatRambler/toost) placed in `toost`
 - (optional) [pm2](https://pm2.keymetrics.io/), to manage the bot's process
 
 ### Installation
